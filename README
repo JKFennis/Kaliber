@@ -51,4 +51,6 @@ Known bugs:
 - PS Move acceleration, gyro and magnetometer values does not cap at min and max.
 - Mouse X, Y and scroll values does not cap at min and max.
 
+Tested on OSX 10.6 and 10.7, fixes needed for 10.5 and 10.8
+Fix loading of Java Native/Dynamic libraries (both Windows and OS X)
 ————————————————————
