@@ -47,8 +47,12 @@ Devices tested:
 
 
 Known bugs:
-- Sending wrong values to PS Move LED and Rumble creates a background error.
+- OSX creates an extra non usable mouse.
+- PS Move LED and Rumble creates a background error if wrong values (floats) are received.
+- PS Move does not allow simultaneous button presses.
 - PS Move acceleration, gyro and magnetometer values does not cap at min and max.
 - Mouse X, Y and scroll values does not cap at min and max.
+- Wacom tables crashes the application on start.
+- Plug names are not saved on change.
 
 ————————————————————
