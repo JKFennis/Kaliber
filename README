@@ -55,4 +55,6 @@ Known bugs:
 - Wacom tables crashes the application on start.
 - Plug names are not saved on change.
 
+Tested on OSX 10.6 and 10.7, fixes needed for 10.5 and 10.8
+Fix loading of Java Native/Dynamic libraries (both Windows and OS X)
 ————————————————————
