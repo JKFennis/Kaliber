@@ -1,3 +1,23 @@
+/*
+The MIT License (MIT)
+
+Copyright (c) 2012 Adam Henriksson, Jules Fennis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+and associated documentation files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions: The above copyright
+notice and this permission notice shall be included in all copies or substantial portions of
+the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
@@ -27,8 +47,7 @@ class OSCmachine {
 			c.setTarget(new InetSocketAddress(target, outport));
 			c.start();
 		} catch (IOException e) {
-			OpenMove9.printConsole("Failed to set up listener " + e.toString(),
-					false);
+			Kaliber.printConsole("Failed to set up listener " + e.toString(), false);
 		}
 	}
 
@@ -56,98 +75,33 @@ class OSCmachine {
 					Device d = Device.Devices.get(moveNum - 1);
 					if (d instanceof MoveController) {
 
-						try {
-
-							if (msg.getName().contains("/Rumble")) {
-								int rumble = 0;
-								if (msg.getArg(0).equals("OFF")) {
-									d.setRumbleValue(0);
-								} else if (msg.getArg(0).equals("ON")) {
+						if (msg.getName().contains("/Rumble")) {
+							if (msg.getArg(0).equals("OFF")) {
+								d.setRumbleValue(0);
+							}else if (msg.getArg(0).equals("ON")) {
 									d.setRumbleValue(255);
-								} else {
-									if (msg.getArg(0).getClass()
-											.equals(Float.class)) {
-										rumble = (int) Math.round((Float) msg
-												.getArg(0));
-									} else {
-										if (msg.getArg(0).getClass()
-												.equals(Integer.class))
-											rumble = (Integer) msg.getArg(0);
-									}
-									d.setRumbleValue(rumble);
-								}
-								OpenMove9.printConsole("Message reveived "
-										+ msg.getName() + " "
-										+ msg.getArg(0).toString(), false);
+							} else {
+								int rumble = (Integer) msg.getArg(0);
+								d.setRumbleValue(rumble);
 							}
-							if (msg.getName().contains("/Led")) {
-								if (msg.getArg(0).equals("OFF")) {
-									d.setLed(0, 0, 0);
-									OpenMove9.printConsole(
-											"Message reveived " + msg.getName()
-													+ " "
-													+ msg.getArg(0).toString(),
-											false);
-								} else if (msg.getArg(0).equals("ON")) {
-									d.setLed(255, 255, 255);
-									OpenMove9.printConsole(
-											"Message reveived " + msg.getName()
-													+ " "
-													+ msg.getArg(0).toString(),
-											false);
-								} else {
-									int red = 0;
-									int green = 0;
-									int blue = 0;
-									if (msg.getArg(0).getClass()
-											.equals(Float.class))
-										red = (int) Math.round((Float) msg
-												.getArg(0));
-									else if (msg.getArg(0).getClass()
-											.equals(Integer.class))
-										red = (Integer) msg.getArg(0);
-
-									if (msg.getArg(1).getClass()
-											.equals(Float.class))
-										green = (int) Math.round((Float) msg
-												.getArg(1));
-									else if (msg.getArg(1).getClass()
-											.equals(Integer.class))
-										green = (Integer) msg.getArg(1);
-
-									if (msg.getArg(1).getClass()
-											.equals(Float.class))
-										blue = (int) Math.round((Float) msg
-												.getArg(2));
-									else if (msg.getArg(2).getClass()
-											.equals(Integer.class))
-										blue = (Integer) msg.getArg(2);
-									d.setLed(red, green, blue);
-									OpenMove9.printConsole(
-											"Message reveived " + msg.getName()
-													+ " "
-													+ msg.getArg(0).toString()
-													+ " "
-													+ msg.getArg(1).toString()
-													+ " "
-													+ msg.getArg(2).toString(),
-											false);
-								}
-
+						}
+						if (msg.getName().contains("/Led")) {
+							if (msg.getArg(0).equals("OFF")) {
+								d.setLed(0, 0, 0);
+							}else if (msg.getArg(0).equals("ON")) {
+								d.setLed(255, 255, 255);
+							} else {
+								int red = (Integer) msg.getArg(0);
+								int green = (Integer) msg.getArg(1);
+								int blue = (Integer) msg.getArg(2);
+								d.setLed(red, green, blue);
 							}
-						} catch (ArrayIndexOutOfBoundsException ex) {
-							OpenMove9
-									.printConsole(
-											"Failed to receive message: wrong set of arguments",
-											false);
-							return;
 						}
 					}
 				}
 			});
 		} catch (Exception e) {
-			OpenMove9.printConsole("Failed to receive message " + e.toString(),
-					false);
+			Kaliber.printConsole("Failed to receive message " + e.toString(), false);
 			return;
 		}
 	}
@@ -169,21 +123,18 @@ class OSCmachine {
 			msg = new OSCMessage(addrPattern, argsout);
 			return msg;
 		} catch (Exception e) {
-			OpenMove9.printConsole("Failed to set up OSC " + e.toString(),
-					false);
+			Kaliber.printConsole("Failed to set up OSC " + e.toString(), false);
 		}
 		return msg;
 	}
 
 	public static void sendMessage(OSCMessage m) {
-		if (OpenMove9.startSending) {
+		if (Kaliber.startSending) {
 			try {
-				OpenMove9.printConsole(
-						"Sending " + m.getName() + " " + m.getArg(0), true);
+				Kaliber.printConsole("Sending " + m.getName()+" "+m.getArg(0), true);
 				c.send(m);
 			} catch (Exception e) {
-				OpenMove9.printConsole("sendMessage error " + e.toString(),
-						true);
+				Kaliber.printConsole("sendMessage error " + e.toString(), true);
 			}
 		}
 	}

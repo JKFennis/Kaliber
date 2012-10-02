@@ -1,3 +1,23 @@
+/*
+The MIT License (MIT)
+
+Copyright (c) 2012 Adam Henriksson, Jules Fennis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+and associated documentation files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions: The above copyright
+notice and this permission notice shall be included in all copies or substantial portions of
+the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 import io.thp.psmove.Button;
 import javax.swing.table.AbstractTableModel;
 
@@ -130,7 +150,7 @@ public class MoveComponentTableModel extends AbstractTableModel {
 	public boolean isCellEditable(int row, int col) {
 		if (col == 2 || col == 5) {
 			return false;
-		} if ((col == 1 && row > 17) || (col == 3 && row > 17) || (col == 4 && row > 17)) {
+		} if ((col == 1 && row > 23) || (col == 3 && row > 23) || (col == 4 && row > 23)) {
 			return false;
 		} else {
 			return true;
@@ -153,17 +173,17 @@ public class MoveComponentTableModel extends AbstractTableModel {
 			}
 			// Component is deselected, it's value should not be send over
 			if (compSelected) {
-				 if (row > 18 ) {
-					move.setcompSelected(19, false);
-					move.setcompSelected(20, false);
-					move.setcompSelected(21, false);
+				 if (row > 24 ) {
+					move.setcompSelected(25, false);
+					move.setcompSelected(26, false);
+					move.setcompSelected(27, false);
 				 }
 				move.setcompSelected(row, false);
 			} else {
-				 if (row > 18 ) {
-						move.setcompSelected(19, true);
-						move.setcompSelected(20, true);
-						move.setcompSelected(21, true);
+				 if (row > 24 ) {
+						move.setcompSelected(25, true);
+						move.setcompSelected(26, true);
+						move.setcompSelected(27, true);
 					 }
 				// Component is selected, it's value should be send over
 				move.setcompSelected(row, true);
