@@ -2,8 +2,7 @@ KALIBER
 
 Kaliber is an open source software built to handle data between computers and devices. The desktop application communicates through the OSC protocol and can be used together with different programming environments.
 
-Mail to:
-kaliber@interactiondesign.se
+Mail to: kaliber@interactiondesign.se
 
 Created by:
 Adam Henriksson <www.adamhenriksson.com>
@@ -63,5 +62,5 @@ Fix loading of Java Native/Dynamic libraries (both Windows and OS X)
 ————————————————————
 
 Screenshot
-![Screenshot](https://raw.github.com/JKFennis/Kaliber/master/img/Kaliber_app.png)
+!(https://raw.github.com/JKFennis/Kaliber/master/img/Kaliber_app.png)
 
