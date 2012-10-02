@@ -62,5 +62,5 @@ Fix loading of Java Native/Dynamic libraries (both Windows and OS X)
 ————————————————————
 
 Screenshot
-!(https://raw.github.com/JKFennis/Kaliber/master/img/Kaliber_app.png)
+![Screenshot](https://raw.github.com/JKFennis/Kaliber/master/img/Kaliber_app.png)
 
