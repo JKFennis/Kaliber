@@ -61,6 +61,5 @@ Tested on OSX 10.6 and 10.7, fixes needed for 10.5 and 10.8
 Fix loading of Java Native/Dynamic libraries (both Windows and OS X)
 ————————————————————
 
-Screenshot
 ![Screenshot](https://raw.github.com/JKFennis/Kaliber/master/img/Kaliber_app.png)
 
